@@ -1,0 +1,13 @@
+
+
+<%= title "Posts" %>
+
+
+<% @posts.each do |post| %>
+    <h2><%= post.title %></h2>
+    <h4><%= post.author.name %></h4>
+    <h5><%= postText(post.text) %></h5>
+    <h6><%= post.created_at %></h6>
+
+    <hr/>
+<% end %>
