@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
 
-  root 'posts#homepage'
-  get '/posts/homepage', 'posts#homepage'
+
 
   resources :comments
   resources :categories
-  resources :posts
+  resources :posts do
+    collection do
+      get 'homepage'
+      post 'homepage'
+    end
+  end
   resources :authors
 
+
+  root 'posts#homepage'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

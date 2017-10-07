@@ -2,12 +2,53 @@
 
 <%= title "Posts" %>
 
+<div class="row">
+  <div class="col-md-8 col-sm-8">
+    <% @posts.each do |post| %>
+        <h2><%= postTitle(post.title, params[:title]) %></h2>
+        <h4><%= post.author.name %></h4>
+        <h5><%= postText(post.text) %></h5>
+        <h6><%= dataHora(post.created_at) %></h6>
 
-<% @posts.each do |post| %>
-    <h2><%= post.title %></h2>
-    <h4><%= post.author.name %></h4>
-    <h5><%= postText(post.text) %></h5>
-    <h6><%= post.created_at %></h6>
+        <hr/>
+    <% end %>
+  </div>
 
-    <hr/>
-<% end %>
+  <div class="col-md-4 col-sm-4">
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Categorias</div>
+          <div class="panel-body">
+            <ul>
+              <% @categories.each do |category| %>
+                  <li>
+                    <%= link_to category.description, homepage_posts_path(category_id: category.id)%>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Pesquisa</div>
+          <div class="panel-body">
+            <%= form_tag("/posts/homepage", method: "post") do %>
+                <%= label_tag(:title, "Search:") %>
+                <%= text_field_tag(:title) %>
+                <%= submit_tag("Search") %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+</div>

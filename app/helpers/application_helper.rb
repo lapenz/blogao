@@ -14,4 +14,9 @@ module ApplicationHelper
       end
     end
   end
+
+  def dataHora(date)
+    date.strftime('%d/%m/%Y as %I:%M%p')
+  end
+
 end

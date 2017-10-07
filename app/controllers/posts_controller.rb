@@ -13,7 +13,13 @@ class PostsController < ApplicationController
   end
 
   def homepage
-    @posts = Post.all
+
+    #byebug
+    @posts = Post.recents
+    @posts = @posts.where(category_id: params[:category_id]) unless params[:category_id].blank?
+    @posts = @posts.where('UPPER(title) like ?', "%#{params[:title].to_s.upcase}%") unless params[:title].blank?
+
+    @categories = Category.all.order :description
   end
 
   # GET /posts/new
