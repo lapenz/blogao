@@ -6,10 +6,11 @@
   <div class="col-md-8 col-sm-8">
     <% @posts.each do |post| %>
         <h2><%= postTitle(post.title, params[:title]) %></h2>
-        <h4><%= post.author.name %></h4>
         <h5><%= postText(post.text) %></h5>
         <h6><%= dataHora(post.created_at) %></h6>
 
+        <%= image_tag(post.author.avatar.thumb.url) unless post.author.avatar.file.nil? %>
+        <strong><%= post.author.name %></strong>
         <hr/>
     <% end %>
   </div>

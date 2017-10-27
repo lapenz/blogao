@@ -1,4 +1,4 @@
-<%= form_with(model: author, local: true) do |form| %>
+<%= form_with(model: author, local: true, multipart: true ) do |form| %>
   <% if author.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(author.errors.count, "error") %> prohibited this author from being saved:</h2>
@@ -20,6 +20,28 @@
     <%= form.label :age %>
     <%= form.number_field :age, id: :author_age %>
   </div>
+
+    <div class="row">
+      <div class="col-xs-6 col-md-3">
+        <a href="#" class="thumbnail">
+          <%= image_tag(author.avatar.thumb.url) unless author.avatar.file.nil? %>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="field">
+      <%= form.label :avatar %>
+      <%= form.file_field :avatar, id: :author_avatar %>
+    </div>
+    <p>
+      <label>
+        <%= form.check_box :remove_avatar %>
+        Remove avatar
+      </label>
+    </p>
+
+    <%= form.hidden_field :avatar_cache %>
 
   <div class="actions">
     <%= form.submit %>
